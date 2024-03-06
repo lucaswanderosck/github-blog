@@ -14,8 +14,8 @@ export const defaultTheme = {
   },
 
   sizes: {
-    xsm: '.75rem',
-    sm: '.875rem',
+    xsm: '0.75rem',
+    sm: '0.875rem',
     md: '1rem',
     lg: '1.125rem',
     xlg: '1.25rem',

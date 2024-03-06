@@ -1,9 +1,10 @@
 import React from 'react'
+import { Profile } from '../../components/Profile'
 
 export const Home: React.FC = () => {
   return (
     <>
-      <h1>Home</h1>
+      <Profile />
     </>
   )
 }

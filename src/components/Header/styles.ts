@@ -13,4 +13,6 @@ export const Container = styled.header`
   justify-content: center;
 `
 
-export const Logo = styled.img``
+export const Logo = styled.img`
+  margin-bottom: 5rem;
+`
