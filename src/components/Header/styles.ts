@@ -7,12 +7,9 @@ export const Container = styled.header`
   background-repeat: no-repeat;
   height: 300px;
   width: 100vw;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 `
 
 export const Logo = styled.img`
-  margin-bottom: 5rem;
+  margin-top: 3rem;
 `

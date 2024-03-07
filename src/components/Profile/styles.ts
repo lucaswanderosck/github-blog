@@ -13,6 +13,7 @@ export const Container = styled.div`
   gap: 2rem;
 
   margin-top: calc(-212px / 2);
+  margin-bottom: 4.5rem;
 `
 
 export const Name = styled.h3`
