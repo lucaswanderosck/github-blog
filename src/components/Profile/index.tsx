@@ -1,36 +1,54 @@
 import React from 'react'
 import { FaBuilding, FaGithub } from 'react-icons/fa'
-import { FaArrowUpRightFromSquare, FaUserGroup } from 'react-icons/fa6'
+import { FaArrowUpRightFromSquare, FaBookBookmark } from 'react-icons/fa6'
+import { api } from '../../lib/axios'
 import { Avatar, Bio, Container, Head, Infos } from './styles'
 
+interface GithubUser {
+  name: string
+  login: string
+  company: string
+  public_repos: number
+  bio: string
+  html_url: string
+  avatar_url: string
+}
+
 export const Profile: React.FC = () => {
+  const [user, setUser] = React.useState<GithubUser>({} as GithubUser)
+
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      const response = await api.get('lucaswanderosck')
+      setUser(response.data)
+    }
+    fetchUser()
+  }, [])
+
   return (
     <Container>
-      <Avatar src="//via.placeholder.com/148x148" alt="" />
+      <Avatar src={user.avatar_url} alt="" />
       <div>
         <Head>
-          <h3>John Doe</h3>
-          <a href="">
+          <h3>{user.name}</h3>
+          <a href={user.html_url}>
             <span>Github</span>
             <FaArrowUpRightFromSquare />
           </a>
         </Head>
-        <Bio>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita eius
-          libero soluta aliquid rem dolorem! Nisi, numquam. Fugiat amet facilis,
-        </Bio>
+        <Bio>{user.bio}</Bio>
         <Infos>
           <p>
             <FaGithub size={18} />
-            <span>username</span>
+            <span>{user.login}</span>
           </p>
           <p>
             <FaBuilding size={18} />
-            <span>empresa</span>
+            <span>{user.company}</span>
           </p>
           <p>
-            <FaUserGroup size={18} />
-            <span>32 seguidores</span>
+            <FaBookBookmark size={18} />
+            <span>{user.public_repos} repositórios</span>
           </p>
         </Infos>
       </div>
