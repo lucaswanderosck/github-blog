@@ -1,14 +1,20 @@
 import React from 'react'
 import { FaBuilding, FaGithub } from 'react-icons/fa'
-import { FaUserGroup } from 'react-icons/fa6'
-import { Bio, Container, Infos, Name } from './styles'
+import { FaArrowUpRightFromSquare, FaUserGroup } from 'react-icons/fa6'
+import { Avatar, Bio, Container, Head, Infos } from './styles'
 
 export const Profile: React.FC = () => {
   return (
     <Container>
-      <img src="//via.placeholder.com/148x148" alt="" />
+      <Avatar src="//via.placeholder.com/148x148" alt="" />
       <div>
-        <Name>John Doe</Name>
+        <Head>
+          <h3>John Doe</h3>
+          <a href="">
+            <span>Github</span>
+            <FaArrowUpRightFromSquare />
+          </a>
+        </Head>
         <Bio>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita eius
           libero soluta aliquid rem dolorem! Nisi, numquam. Fugiat amet facilis,

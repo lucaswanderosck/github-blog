@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.colors['base-background']};
     -webit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   body, input, button, textarea {

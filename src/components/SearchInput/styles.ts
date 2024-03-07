@@ -9,11 +9,13 @@ export const Container = styled.div`
 
     strong {
       font-size: ${({ theme }) => theme.sizes.lg};
+      line-height: 1.6;
       color: ${({ theme }) => theme.colors['base-subtitle']};
     }
 
     span {
       font-size: ${({ theme }) => theme.sizes.sm};
+      line-height: 1.6;
       color: ${({ theme }) => theme.colors['base-label']};
     }
   }
@@ -23,11 +25,12 @@ export const Container = styled.div`
     width: 100%;
     padding: 0.75rem 1rem;
     border-radius: 6px;
-    border: 1px solid transparent;
+    border: 1px solid ${({ theme }) => theme.colors['base-border']};
     outline: none;
     background: ${({ theme }) => theme.colors['base-input']};
     color: ${({ theme }) => theme.colors['base-text']};
     font-size: ${({ theme }) => theme.sizes.md};
+    line-height: 1.6;
     transition: border-color 0.2s;
 
     &:focus {

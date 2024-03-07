@@ -5,9 +5,14 @@ export const Container = styled.div`
   background: ${({ theme }) => theme.colors['base-profile']};
   color: ${({ theme }) => theme.colors['base-text']};
   font-size: ${({ theme }) => theme.sizes.md};
-  font-size: 16px;
+  line-height: 1.6;
   border-radius: 10px;
   padding: 2rem;
+  /* box-shadow:
+    rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px; */
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 
   display: flex;
   gap: 2rem;
@@ -16,10 +21,48 @@ export const Container = styled.div`
   margin-bottom: 4.5rem;
 `
 
-export const Name = styled.h3`
-  color: ${({ theme }) => theme.colors['base-title']};
-  font-size: ${({ theme }) => theme.sizes.xxlg};
+export const Avatar = styled.img`
+  width: 148px;
+  height: 148px;
+  border-radius: 8px;
+  object-fit: cover;
+`
+
+export const Head = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 0.5rem;
+
+  h3 {
+    color: ${({ theme }) => theme.colors['base-title']};
+    font-size: ${({ theme }) => theme.sizes.xxlg};
+    line-height: normal;
+  }
+
+  a {
+    color: ${({ theme }) => theme.colors.blue};
+    font-size: ${({ theme }) => theme.sizes.xsm};
+    font-weight: bold;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.blue};
+    }
+
+    svg {
+      margin-bottom: 2px;
+    }
+
+    span {
+      text-transform: uppercase;
+    }
+  }
 `
 
 export const Bio = styled.p`
