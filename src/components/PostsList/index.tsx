@@ -1,69 +1,60 @@
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale/pt-BR'
 import React from 'react'
+import { api } from '../../lib/axios'
+import { formatDescription } from '../../utils/formatters'
 import { Container, Description, Head, PostItem } from './styles'
 
-export const PostsList: React.FC = () => {
-  const formatDescription = (description: string) => {
-    const words = description.split(' ')
-    const formattedDescription = words.slice(0, 53).join(' ')
-    return `${formattedDescription}...`
-  }
+export interface PostI {
+  title: string
+  created_at: string
+  body: string
+  number: number
+  html_url: string
+  comments: number
+  author_association: string
+  // user: {
+  //   login: string
+  // }
+}
 
-  const description = `Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in JavaScript and
-              what properties they have. These can be used to build other data
-              structures. Wherever possible, comparisons with other languages
-              are drawn. Dynamic typing JavaScript is a loosely typed and
-              dynamic language. Variables in JavaScript are not directly
-              associated with any particular value type, and any variable can be
-              assigned (and re-assigned) values of all types: let foo = 42; //
-              foo is now a number foo = bar; // foo is now a string foo = true;
-              // foo is now a boolean`
+interface IssuesPost {
+  total_count: number
+  items: PostI[]
+}
+
+export const PostsList: React.FC = () => {
+  const [posts, setPosts] = React.useState<IssuesPost>({
+    total_count: 0,
+    items: [],
+  })
+
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await api.get(
+        '/search/issues?q=repo:lucaswanderosck/github-blog',
+      )
+      setPosts(response.data)
+    }
+    fetchPosts()
+  }, [])
 
   return (
     <Container>
-      <PostItem to={'/post'}>
-        <Head>
-          <h4>JavaScript data types and data str</h4>
-          <span>Há 1 dia</span>
-        </Head>
-        <Description>{formatDescription(description)}</Description>
-      </PostItem>
-      <PostItem to={'/post'}>
-        <Head>
-          <h4>JavaScript data types and data structures</h4>
-          <span>Há 1 dia</span>
-        </Head>
-        <Description>{formatDescription(description)}</Description>
-      </PostItem>
-      <PostItem to={'/post'}>
-        <Head>
-          <h4>JavaScript data types and data structures</h4>
-          <span>Há 1 dia</span>
-        </Head>
-        <Description>{formatDescription(description)}</Description>
-      </PostItem>
-      <PostItem to={'/post'}>
-        <Head>
-          <h4>JavaScript data types and data structures</h4>
-          <span>Há 1 dia</span>
-        </Head>
-        <Description>{formatDescription(description)}</Description>
-      </PostItem>
-      <PostItem to={'/post'}>
-        <Head>
-          <h4>JavaScript data types and data structures</h4>
-          <span>Há 1 dia</span>
-        </Head>
-        <Description>{formatDescription(description)}</Description>
-      </PostItem>
-      <PostItem to={'/post'}>
-        <Head>
-          <h4>JavaScript data types and data structures</h4>
-          <span>Há 1 dia</span>
-        </Head>
-        <Description>{formatDescription(description)}</Description>
-      </PostItem>
+      {posts.items.map((post) => (
+        <PostItem to={`/post/${post.number}`} key={post.number}>
+          <Head>
+            <h4>{post.title}</h4>
+            <span>
+              {formatDistanceToNow(post.created_at, {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+            </span>
+          </Head>
+          <Description>{formatDescription(post.body)}</Description>
+        </PostItem>
+      ))}
     </Container>
   )
 }

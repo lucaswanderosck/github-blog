@@ -1,42 +1,98 @@
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale/pt-BR'
 import React from 'react'
 import {
-    FaCalendarDay,
-    FaChevronLeft,
-    FaComment,
-    FaGithub,
+  FaCalendarDay,
+  FaChevronLeft,
+  FaComment,
+  FaGithub,
 } from 'react-icons/fa'
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
-import { Link } from 'react-router-dom'
-import { Container, Headline, InfosPost, PostTitle } from './styles'
+import { RotatingTriangles } from 'react-loader-spinner'
+import { Link, useParams } from 'react-router-dom'
+import { api } from '../../lib/axios'
+import { PostI } from '../PostsList'
+import {
+  Container,
+  ContentPost,
+  Headline,
+  InformationsPost,
+  InfosPost,
+  PostTitle,
+} from './styles'
 
 export const PostInfo: React.FC = () => {
+  const { id } = useParams()
+  const [post, setPost] = React.useState<PostI>({} as PostI)
+
+  React.useEffect(() => {
+    const fetchPost = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const response = await api.get(
+        `repos/lucaswanderosck/github-blog/issues/${id}`,
+      )
+      setPost(response.data)
+    }
+    fetchPost()
+  }, [id])
+
+  if (!post.title) {
+    return (
+      <Container
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <RotatingTriangles
+          visible={!post.title}
+          height="80"
+          width="80"
+          ariaLabel="rotating-triangles-loading"
+          colors={['#AFC2D4', '#7B96B2', '#3A536B']}
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </Container>
+    )
+  }
+
   return (
     <Container>
-      <Headline>
-        <Link to={'/'}>
-          <FaChevronLeft />
-          <span>Voltar</span>
-        </Link>
-        <a href="#">
-          <span>Ver no github</span>
-          <FaArrowUpRightFromSquare />
-        </a>
-      </Headline>
-      <PostTitle>JavaScript data types and data structures</PostTitle>
-      <InfosPost>
-        <p>
-          <FaGithub size={18} />
-          <span>username</span>
-        </p>
-        <p>
-          <FaCalendarDay size={18} />
-          <span>Há 1 dia</span>
-        </p>
-        <p>
-          <FaComment size={18} />
-          <span>5 comentários</span>
-        </p>
-      </InfosPost>
+      <InformationsPost>
+        <Headline>
+          <Link to={'/'}>
+            <FaChevronLeft />
+            <span>Voltar</span>
+          </Link>
+          <a href={post.html_url}>
+            <span>Ver no github</span>
+            <FaArrowUpRightFromSquare />
+          </a>
+        </Headline>
+        <PostTitle>{post.title}</PostTitle>
+        <InfosPost>
+          <p>
+            <FaGithub size={18} />
+            <span>{post.author_association}</span>
+          </p>
+          <p>
+            <FaCalendarDay size={18} />
+            <span>
+              {formatDistanceToNow(post.created_at, {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+            </span>
+          </p>
+          <p>
+            <FaComment size={18} />
+            <span>{post.comments} comentários</span>
+          </p>
+        </InfosPost>
+      </InformationsPost>
+      <ContentPost>{post.body}</ContentPost>
     </Container>
   )
 }

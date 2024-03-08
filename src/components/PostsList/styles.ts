@@ -1,3 +1,4 @@
+import Markdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -36,7 +37,6 @@ export const Head = styled.div`
     font-size: ${({ theme }) => theme.sizes.xlg};
     line-height: 1.6;
     color: ${({ theme }) => theme.colors['base-title']};
-    width: 250px;
   }
 
   span {
@@ -44,13 +44,13 @@ export const Head = styled.div`
     line-height: 1.6;
     color: ${({ theme }) => theme.colors['base-span']};
 
-    position: absolute;
+    /* position: absolute;
     top: 4px;
-    right: 0;
+    right: 0; */
   }
 `
 
-export const Description = styled.p`
+export const Description = styled(Markdown)`
   color: ${({ theme }) => theme.colors['base-text']};
   font-size: ${({ theme }) => theme.sizes.md};
   line-height: 1.6;

@@ -21,7 +21,7 @@ export const Profile: React.FC = () => {
   React.useEffect(() => {
     const fetchUser = async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000))
-      const response = await api.get('lucaswanderosck')
+      const response = await api.get('users/lucaswanderosck')
       setUser(response.data)
     }
     fetchUser()
