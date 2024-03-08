@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaBuilding, FaGithub } from 'react-icons/fa'
 import { FaArrowUpRightFromSquare, FaBookBookmark } from 'react-icons/fa6'
+import { RotatingTriangles } from 'react-loader-spinner'
 import { api } from '../../lib/axios'
 import { Avatar, Bio, Container, Head, Infos } from './styles'
 
@@ -19,11 +20,33 @@ export const Profile: React.FC = () => {
 
   React.useEffect(() => {
     const fetchUser = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       const response = await api.get('lucaswanderosck')
       setUser(response.data)
     }
     fetchUser()
   }, [])
+
+  if (!user.name)
+    return (
+      <Container
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <RotatingTriangles
+          visible={!user.name}
+          height="80"
+          width="80"
+          ariaLabel="rotating-triangles-loading"
+          colors={['#AFC2D4', '#7B96B2', '#3A536B']}
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </Container>
+    )
 
   return (
     <Container>
