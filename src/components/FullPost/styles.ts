@@ -101,9 +101,16 @@ export const ContentPost = styled(Markdown)`
     padding: 1rem;
     border-radius: 2px;
     margin: 1rem 0;
-  }
 
-  code {
+    & > div {
+      background: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+
+      code {
+        line-height: 1.6 !important;
+      }
+    }
   }
 
   a {
