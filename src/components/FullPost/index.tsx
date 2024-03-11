@@ -10,8 +10,8 @@ import {
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
 import { RotatingTriangles } from 'react-loader-spinner'
 import { Link, useParams } from 'react-router-dom'
+import { PostI } from '../../contexts/PostContext'
 import { api } from '../../lib/axios'
-import { PostI } from '../PostsList'
 import {
   Container,
   ContentPost,
@@ -21,9 +21,9 @@ import {
   PostTitle,
 } from './styles'
 
-export const PostInfo: React.FC = () => {
-  const { id } = useParams()
+export const FullPost: React.FC = () => {
   const [post, setPost] = React.useState<PostI>({} as PostI)
+  const { id } = useParams()
 
   React.useEffect(() => {
     const fetchPost = async () => {
@@ -75,7 +75,7 @@ export const PostInfo: React.FC = () => {
         <InfosPost>
           <p>
             <FaGithub size={18} />
-            <span>{post.author_association}</span>
+            <span>{post.user.login}</span>
           </p>
           <p>
             <FaCalendarDay size={18} />

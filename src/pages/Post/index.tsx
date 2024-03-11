@@ -1,10 +1,10 @@
 import React from 'react'
-import { PostInfo } from '../../components/PostInfo'
+import { FullPost } from '../../components/FullPost'
 
 export const Post: React.FC = () => {
   return (
     <>
-      <PostInfo />
+      <FullPost />
     </>
   )
 }
