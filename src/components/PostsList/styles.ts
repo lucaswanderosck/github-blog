@@ -16,37 +16,41 @@ export const Container = styled.ul`
 
 export const PostItem = styled(Link)`
   background: ${({ theme }) => theme.colors['base-post']};
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 10px;
   padding: 2rem;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: border-color 0.3s;
 
   &:hover {
     border-color: ${({ theme }) => theme.colors['base-label']};
   }
 `
 
-export const Head = styled.div`
+export const Head = styled.header`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
   margin-bottom: 1.25rem;
-  position: relative;
 
   h4 {
+    flex: 1;
+    overflow: hidden;
     font-size: ${({ theme }) => theme.sizes.xlg};
     line-height: 1.6;
+    text-overflow: ellipsis;
     color: ${({ theme }) => theme.colors['base-title']};
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   span {
+    width: max-content;
     font-size: ${({ theme }) => theme.sizes.sm};
-    line-height: 1.6;
     color: ${({ theme }) => theme.colors['base-span']};
-
-    /* position: absolute;
-    top: 4px;
-    right: 0; */
+    line-height: 1.6;
   }
 `
 
@@ -54,4 +58,9 @@ export const Description = styled(Markdown)`
   color: ${({ theme }) => theme.colors['base-text']};
   font-size: ${({ theme }) => theme.sizes.md};
   line-height: 1.6;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 `

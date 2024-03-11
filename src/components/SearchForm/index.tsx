@@ -27,7 +27,7 @@ export const SearchForm: React.FC = () => {
     <Container onSubmit={handleSubmit(handleSearchPost)}>
       <div>
         <strong>Publicações</strong>
-        <span>{posts.total_count} publicações</span>
+        <span>{posts.length} publicações</span>
       </div>
       <input {...register('query')} type="text" placeholder="Buscar Conteúdo" />
     </Container>

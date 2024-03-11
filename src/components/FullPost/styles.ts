@@ -32,7 +32,7 @@ export const Headline = styled.div`
     align-items: center;
     gap: 0.5rem;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color 0.3s;
 
     &:hover {
       border-color: ${({ theme }) => theme.colors.blue};
@@ -113,7 +113,7 @@ export const ContentPost = styled(Markdown)`
     border-bottom: 1px solid transparent;
     font-size: ${({ theme }) => theme.sizes.sm};
     line-height: 1.6;
-    transition: border-color 0.2s;
+    transition: border-color 0.3s;
 
     &:hover {
       border-color: ${({ theme }) => theme.colors.blue};

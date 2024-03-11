@@ -28,7 +28,7 @@ export const Avatar = styled.img`
   object-fit: cover;
 `
 
-export const Head = styled.div`
+export const Head = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,7 +49,7 @@ export const Head = styled.div`
     align-items: center;
     gap: 0.5rem;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color 0.3s;
 
     &:hover {
       border-color: ${({ theme }) => theme.colors.blue};

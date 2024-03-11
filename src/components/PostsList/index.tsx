@@ -10,7 +10,7 @@ export const PostsList: React.FC = () => {
 
   return (
     <Container>
-      {posts.items.map((post) => (
+      {posts.map((post) => (
         <PostItem to={`/post/${post.number}`} key={post.number}>
           <Head>
             <h4>{post.title}</h4>

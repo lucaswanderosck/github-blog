@@ -31,7 +31,7 @@ export const Container = styled.form`
     color: ${({ theme }) => theme.colors['base-text']};
     font-size: ${({ theme }) => theme.sizes.md};
     line-height: 1.6;
-    transition: border-color 0.2s;
+    transition: border-color 0.3s;
 
     &:focus {
       border-color: ${({ theme }) => theme.colors.blue};
