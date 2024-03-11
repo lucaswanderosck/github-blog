@@ -1,17 +1,16 @@
-import { formatDistanceToNow } from 'date-fns'
-import { ptBR } from 'date-fns/locale/pt-BR'
 import React from 'react'
 import {
+  FaArrowUpRightFromSquare,
   FaCalendarDay,
   FaChevronLeft,
   FaComment,
   FaGithub,
-} from 'react-icons/fa'
-import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
+} from 'react-icons/fa6'
 import { RotatingTriangles } from 'react-loader-spinner'
 import { Link, useParams } from 'react-router-dom'
 import { PostI } from '../../contexts/PostContext'
 import { api } from '../../lib/axios'
+import { formatDate } from '../../utils/formatters'
 import {
   Container,
   ContentPost,
@@ -25,16 +24,20 @@ export const FullPost: React.FC = () => {
   const [post, setPost] = React.useState<PostI>({} as PostI)
   const { id } = useParams()
 
-  React.useEffect(() => {
-    const fetchPost = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+  const fetchFullPost = React.useCallback(async () => {
+    try {
       const response = await api.get(
         `repos/lucaswanderosck/github-blog/issues/${id}`,
       )
       setPost(response.data)
+    } catch (error) {
+      console.error(error)
     }
-    fetchPost()
   }, [id])
+
+  React.useEffect(() => {
+    fetchFullPost()
+  }, [fetchFullPost, id])
 
   if (!post.title) {
     return (
@@ -79,12 +82,7 @@ export const FullPost: React.FC = () => {
           </p>
           <p>
             <FaCalendarDay size={18} />
-            <span>
-              {formatDistanceToNow(post.created_at, {
-                addSuffix: true,
-                locale: ptBR,
-              })}
-            </span>
+            <span>{formatDate(post.created_at)}</span>
           </p>
           <p>
             <FaComment size={18} />

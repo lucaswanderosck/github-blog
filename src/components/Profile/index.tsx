@@ -1,6 +1,10 @@
 import React from 'react'
-import { FaBuilding, FaGithub } from 'react-icons/fa'
-import { FaArrowUpRightFromSquare, FaBookBookmark } from 'react-icons/fa6'
+import {
+  FaArrowUpRightFromSquare,
+  FaBookBookmark,
+  FaBuilding,
+  FaGithub,
+} from 'react-icons/fa6'
 import { RotatingTriangles } from 'react-loader-spinner'
 import { api } from '../../lib/axios'
 import { Avatar, Bio, Container, Head, Infos } from './styles'
@@ -18,16 +22,20 @@ interface GithubUser {
 export const Profile: React.FC = () => {
   const [user, setUser] = React.useState<GithubUser>({} as GithubUser)
 
-  React.useEffect(() => {
-    const fetchUser = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 500))
+  const fetchUser = React.useCallback(async () => {
+    try {
       const response = await api.get('users/lucaswanderosck')
       setUser(response.data)
+    } catch (error) {
+      console.error(error)
     }
-    fetchUser()
   }, [])
 
-  if (!user.name)
+  React.useEffect(() => {
+    fetchUser()
+  }, [fetchUser])
+
+  if (!user.name) {
     return (
       <Container
         style={{
@@ -47,6 +55,7 @@ export const Profile: React.FC = () => {
         />
       </Container>
     )
+  }
 
   return (
     <Container>
@@ -67,7 +76,11 @@ export const Profile: React.FC = () => {
           </p>
           <p>
             <FaBuilding size={18} />
-            <span>{user.company}</span>
+            {user.company ? (
+              <span>{user.company}</span>
+            ) : (
+              <span>Programing Student</span>
+            )}
           </p>
           <p>
             <FaBookBookmark size={18} />

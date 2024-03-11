@@ -15,7 +15,7 @@ export interface PostI {
 
 interface PostContextType {
   posts: PostI[]
-  fetchPosts: (query?: string) => Promise<void>
+  fetchPosts: (query: string) => Promise<void>
 }
 
 interface PostProviderProps {
@@ -27,18 +27,20 @@ export const PostContext = React.createContext({} as PostContextType)
 export const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
   const [posts, setPosts] = React.useState<PostI[]>([])
 
-  const fetchPosts = async (query?: string) => {
-    const response = await api.get(
-      `/search/issues?q=repo:lucaswanderosck/github-blog${query ? `+${query}` : ''}`,
-    )
-    console.log(response.data.items)
-
-    setPosts(response.data.items)
-  }
+  const fetchPosts = React.useCallback(async (query: string = '') => {
+    try {
+      const response = await api.get(
+        `/search/issues?q=${query}%20repo:lucaswanderosck/github-blog`,
+      )
+      setPosts(response.data.items)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
 
   React.useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [fetchPosts])
 
   return (
     <PostContext.Provider value={{ posts, fetchPosts }}>
