@@ -6,20 +6,20 @@ import { PostContext } from '../../contexts/PostContext'
 import { Container } from './styles'
 
 const schema = zod.object({
-  query: zod.string().min(3),
+  query: zod.string(),
 })
 
 type SearchFormInputs = zod.infer<typeof schema>
 
 export const SearchForm: React.FC = () => {
-  const { posts } = React.useContext(PostContext)
+  const { posts, fetchPosts } = React.useContext(PostContext)
 
   const { register, handleSubmit, reset } = useForm<SearchFormInputs>({
     resolver: zodResolver(schema),
   })
 
   const handleSearchPost = (data: SearchFormInputs) => {
-    console.log(data)
+    fetchPosts(data.query)
     reset()
   }
 

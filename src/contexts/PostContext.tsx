@@ -22,6 +22,7 @@ interface IssuesPost {
 
 interface PostContextType {
   posts: IssuesPost
+  fetchPosts: (query?: string) => Promise<void>
 }
 
 interface PostProviderProps {
@@ -36,17 +37,22 @@ export const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
     items: [],
   })
 
+  const fetchPosts = async (query?: string) => {
+    const response = await api.get(
+      `/search/issues?q=repo:lucaswanderosck/github-blog${query ? `+${query}` : ''}`,
+    )
+    console.log(response.data)
+
+    setPosts(response.data)
+  }
+
   React.useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await api.get(
-        '/search/issues?q=repo:lucaswanderosck/github-blog',
-      )
-      setPosts(response.data)
-    }
     fetchPosts()
   }, [])
 
   return (
-    <PostContext.Provider value={{ posts }}>{children}</PostContext.Provider>
+    <PostContext.Provider value={{ posts, fetchPosts }}>
+      {children}
+    </PostContext.Provider>
   )
 }
