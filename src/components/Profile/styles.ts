@@ -8,17 +8,15 @@ export const Container = styled.div`
   line-height: 1.6;
   border-radius: 10px;
   padding: 2rem;
-  /* box-shadow:
-    rgba(0, 0, 0, 0.15) 0px 15px 25px,
-    rgba(0, 0, 0, 0.05) 0px 5px 10px; */
-
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-
   display: flex;
   gap: 2rem;
-
   margin-top: calc(-212px / 2);
   margin-bottom: 4.5rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 export const Avatar = styled.img`
@@ -26,6 +24,10 @@ export const Avatar = styled.img`
   height: 148px;
   border-radius: 8px;
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 `
 
 export const Head = styled.header`
@@ -83,5 +85,9 @@ export const Infos = styled.div`
     & > svg {
       color: ${({ theme }) => theme.colors['base-label']};
     }
+  }
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
   }
 `

@@ -7,6 +7,6 @@ export const MainContainer = styled.main`
   padding-bottom: 6rem;
 
   @media (max-width: 768px) {
-    width: 85%;
+    width: 87.5%;
   }
 `

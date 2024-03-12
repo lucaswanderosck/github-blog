@@ -18,4 +18,32 @@ export const GlobalStyle = createGlobalStyle`
   body, input, button, textarea {
     font: 400 1rem 'Nunito', sans-serif;
   }
+
+  html {
+    @media (max-width: 1024px) {
+      font-size: 93.75%;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 87.5%;
+    }
+  }
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #112131;
+    border-radius: 20px;
+    border: 3px solid transparent;
+
+    &:hover {
+      background-color: #1C2F41;
+    }
+  }
 `

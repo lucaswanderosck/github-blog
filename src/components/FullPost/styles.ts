@@ -69,6 +69,11 @@ export const InfosPost = styled.div`
       color: ${({ theme }) => theme.colors['base-label']};
     }
   }
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
 `
 
 export const ContentPost = styled(Markdown)`
@@ -76,6 +81,10 @@ export const ContentPost = styled(Markdown)`
   color: ${({ theme }) => theme.colors['base-text']};
   font-size: ${({ theme }) => theme.sizes.md};
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
 
   h2,
   h3 {
