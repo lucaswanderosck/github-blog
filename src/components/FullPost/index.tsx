@@ -8,8 +8,6 @@ import {
 } from 'react-icons/fa6'
 import { RotatingTriangles } from 'react-loader-spinner'
 import { Link, useParams } from 'react-router-dom'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { PostI } from '../../contexts/PostContext'
 import { api } from '../../lib/axios'
 import { formatDate } from '../../utils/formatters'
@@ -92,27 +90,7 @@ export const FullPost: React.FC = () => {
           </p>
         </InfosPost>
       </InformationsPost>
-      <ContentPost
-        components={{
-          code({ className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || '')
-            return match ? (
-              <SyntaxHighlighter
-                style={{ ...dracula }}
-                language={match[1]}
-                PreTag="div"
-                {...props}
-              >
-                {String(children).replace(/\n$/, '')}
-              </SyntaxHighlighter>
-            ) : (
-              <code className={className} {...props} />
-            )
-          },
-        }}
-      >
-        {post.body}
-      </ContentPost>
+      <ContentPost>{post.body}</ContentPost>
     </Container>
   )
 }
